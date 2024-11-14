@@ -57,15 +57,49 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO : 2. Buat properti body berupa widget yang ditampilkan
-      body: _children[_currentIndex],
-      bottomNavigationBar: Theme(data: Theme.of(context).copyWith(
-        canvasColor: Colors.deepPurple[50],
-      )
-      , child: ),
-      // TODO : 3. Buat properti Bottom Navigation Bar dengan nilai theme
-      // TODO : 4. Buat data dan child dari theme
-
-    );
+        // TODO : 2. Buat properti body berupa widget yang ditampilkan
+        body: _children[_currentIndex],
+        bottomNavigationBar: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Colors.deepPurple[50],
+            ),
+            child: BottomNavigationBar(
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.search,
+                    ),
+                    label: 'Search'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.favorite,
+                    ),
+                    label: 'Favorite'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.person,
+                    ),
+                    label: 'Profile'),
+              ],
+              selectedItemColor: Colors.deepPurple,
+              selectedIconTheme: const IconThemeData(color: Colors.deepPurple),
+              unselectedIconTheme: IconThemeData(color: Colors.deepPurple[100]),
+              unselectedItemColor: Colors.deepPurple[100],
+              showUnselectedLabels: true,
+              // TODO : 3. Buat properti Bottom Navigation Bar dengan nilai theme
+              // TODO : 4. Buat data dan child dari theme
+            )));
   }
 }
