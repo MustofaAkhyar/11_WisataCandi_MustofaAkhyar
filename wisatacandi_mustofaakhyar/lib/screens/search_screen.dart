@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wisatacandi_mustofaakhyar/models/candi.dart';
 import 'package:wisatacandi_mustofaakhyar/data/candi_data.dart';
 
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -14,7 +13,16 @@ class _SearchScreenState extends State<SearchScreen> {
   //  TODO: 1. Deklarasilkan variabel yang dibutuhkan
   List<Candi> _filteredCandis = candiList;
   String _searchQuery = '';
-  final TextEditingController _searchController = TextEditingController();
+
+  void _updateSearchQuery(String newQuery) {
+    setState(() {
+      _searchQuery = newQuery;
+      _filteredCandis = candiList
+          .where((candi) =>
+              candi.name.toLowerCase().contains(_searchQuery.toLowerCase()))
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +41,10 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.deepPurple[50]),
-              child: const TextField(
-                autofocus: false,
+              child: TextField(
+                onChanged: _updateSearchQuery,
                 // TODO: 6. Implementasi Fitur Pencarian
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: 'Cari Candi ...',
                     prefixIcon: Icon(Icons.search),
                     border: InputBorder.none,
@@ -56,7 +64,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 final candi = _filteredCandis[index];
                 // TODO: 8. Implementasi GestureDetector dan Hero Animation
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -9,6 +9,7 @@ import 'package:wisatacandi_mustofaakhyar/screens/home_screen.dart';
 import 'package:wisatacandi_mustofaakhyar/widgets/item_card.dart';
 import 'package:wisatacandi_mustofaakhyar/screens/favorite_screen.dart';
 
+
 void main() {
   runApp(const MainApp());
 }
@@ -33,6 +34,12 @@ class MainApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: MainScreen(),
+      initialRoute: '/',
+      routes: {
+        '/homescreen': (context) => const HomeScreen(),
+        '/signin': (context) => SignInScreen(),
+        '/signup': (context) => SignUpScreen(),
+      },
     );
   }
 }
@@ -97,7 +104,7 @@ class _MainScreenState extends State<MainScreen> {
               selectedIconTheme: const IconThemeData(color: Colors.deepPurple),
               unselectedIconTheme: IconThemeData(color: Colors.deepPurple[100]),
               unselectedItemColor: Colors.deepPurple[100],
-              showUnselectedLabels: true,
+              showUnselectedLabels: false,
               // TODO : 3. Buat properti Bottom Navigation Bar dengan nilai theme
               // TODO : 4. Buat data dan child dari theme
             )));
